@@ -178,12 +178,15 @@ public class DefaultScanManager extends ScanManager {
     private final ScanCallback mScanCallback = new ScanCallback() {
         @Override
         public void onScanResult(final int callbackType, final ScanResult result) {
+            BluetoothDevice device = result.getDevice();
+             if (device.getAddress().startsWith("88:88:00:00:")) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     onDiscoveredPeripheral(result);
                 }
             });
+             }
         }
 
         @Override
